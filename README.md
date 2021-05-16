@@ -1,4 +1,4 @@
-# instagram
+# Instagram
 
 This is a cloned version of Instagram.
 
