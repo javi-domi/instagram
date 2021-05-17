@@ -1,22 +1,20 @@
 // import { StatusBar } from "expo-status-bar";
 import React from "react";
 import firebase from "firebase";
-import dotenv from "dotenv";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LandingScreen from "./components/auth/Landing";
 import RegisterScreen from "./components/auth/Register";
 
-dotenv.config();
-
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STROAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID,
+  apiKey: "AIzaSyBxiubMFjjpI_yB35bzWsCu5UlUsyFn_G8",
+  authDomain: "instagram-react-dev.firebaseapp.com",
+  projectId: "instagram-react-dev",
+  storageBucket: "instagram-react-dev.appspot.com",
+  messagingSenderId: "492073167602",
+  appId: "1:492073167602:web:cc963908410ea052793e6b",
+  measurementId: "G-TJSBPGGBZ9",
 };
 
 if (firebase.app.length === 0) {
