@@ -1,39 +1,70 @@
 // import { StatusBar } from "expo-status-bar";
-import React from "react";
-import firebase from "firebase";
+import React, { Component } from "react";
+import firebase from "firebase/app";
+import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LandingScreen from "./components/auth/Landing";
 import RegisterScreen from "./components/auth/Register";
+import firebaseConfig from "./config";
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBxiubMFjjpI_yB35bzWsCu5UlUsyFn_G8",
-  authDomain: "instagram-react-dev.firebaseapp.com",
-  projectId: "instagram-react-dev",
-  storageBucket: "instagram-react-dev.appspot.com",
-  messagingSenderId: "492073167602",
-  appId: "1:492073167602:web:cc963908410ea052793e6b",
-  measurementId: "G-TJSBPGGBZ9",
-};
+firebase.initializeApp(firebaseConfig);
 
-if (firebase.app.length === 0) {
-  firebase.initializeApp(firebaseConfig);
-}
-
+// if (firebase.app.length === 0) {
+//   firebase.initializeApp(firebaseConfig);
+// } else {
+//   firebase.app();
+// }
 const Stack = createStackNavigator();
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Landing">
-        <Stack.Screen
-          name="Landing"
-          component={LandingScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+export class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: false,
+    };
+  }
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        this.setState({
+          loggedIn: false,
+          loaded: true,
+        });
+      } else {
+        this.setState({
+          loggedIn: true,
+          loaded: true,
+        });
+      }
+    });
+  }
+
+  render() {
+    const { loggedIn, loaded } = this.state;
+    if (!loaded) {
+      return (
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <Text>Loading...</Text>
+        </View>
+      );
+    }
+
+    if (!loggedIn) {
+      return (
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Landing">
+            <Stack.Screen
+              name="Landing"
+              component={LandingScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
+    }
+  }
 }
+export default App;
