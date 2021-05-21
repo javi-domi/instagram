@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
+
 import rootReducer from "./redux/reducers";
 import thunk from "redux-thunk";
 
@@ -13,6 +14,8 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 import LandingScreen from "./components/auth/Landing";
 import RegisterScreen from "./components/auth/Register";
 import MainScreen from "./components/Main";
+import AddScreen from "./components/main/Add";
+
 import firebaseConfig from "./config";
 import firebase from "firebase/app";
 
@@ -75,7 +78,16 @@ export class App extends Component {
     }
     return (
       <Provider store={store}>
-        <MainScreen />
+        <NavigationContainer initialRouteName="Main">
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Main"
+              component={MainScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Add" component={AddScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
     );
   }
