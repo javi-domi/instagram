@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { StyleSheet } from "react-native";
 import FeedScreen from "./main/Feed";
 import ProfileScreen from "./main/Profile";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
@@ -20,7 +21,22 @@ export class Main extends Component {
 
   render() {
     return (
-      <Tab.Navigator initialRouteName="Feed" labeled={false}>
+      <Tab.Navigator
+        initialRouteName="Feed"
+        labeled={false}
+        barStyle={{
+          backgroundColor: "white",
+          shadowOffset: { width: 0, height: 4 },
+          shadowRadius: 10,
+          marginHorizontal: 12,
+          marginTop: 0,
+          marginBottom: 36,
+          borderRadius: "20px",
+          padding: 4,
+          overflow: "hidden",
+          height: 68,
+        }}
+      >
         <Tab.Screen
           name="Feed"
           component={FeedScreen}

@@ -57,15 +57,20 @@ export class App extends Component {
 
     if (!loaded) {
       return (
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <Text>Loading...</Text>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ color: "white" }}>Loading...</Text>
         </View>
       );
     }
 
     if (!loggedIn) {
       return (
-        <NavigationContainer>
+        <NavigationContainer style={{ backgroundColor: "#121212" }}>
           <Stack.Navigator initialRouteName="Landing">
             <Stack.Screen
               name="Landing"
