@@ -1,10 +1,22 @@
+import { USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE } from "../constants";
 const initalState = {
   currentUser: null,
+  posts: [],
 };
 
 export const user = (state = initalState, action) => {
-  return {
-    ...state,
-    currentUser: action.currentUser,
-  };
+  switch (action.type) {
+    case USER_STATE_CHANGE:
+      return {
+        ...state,
+        currentUser: action.currentUser,
+      };
+    case USER_POSTS_STATE_CHANGE:
+      return {
+        ...state,
+        posts: action.posts,
+      };
+    default:
+      return state;
+  }
 };
