@@ -4,7 +4,7 @@ import ProfileScreen from "./main/Profile";
 import SearchScreen from "./main/Search";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
+import firebase from "firebase";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchUser, fetchUserPosts } from "../redux/actions/index";
@@ -77,6 +77,14 @@ export class Main extends Component {
         <Tab.Screen
           name="Profile"
           component={ProfileScreen}
+          listeners={({ navigation }) => ({
+            tabPress: (event) => {
+              event.preventDefault();
+              navigation.navigate("Profile", {
+                uid: firebase.auth().currentUser.uid,
+              });
+            },
+          })}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
