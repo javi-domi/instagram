@@ -32,7 +32,7 @@ export class Main extends Component {
           marginHorizontal: 12,
           marginTop: 0,
           marginBottom: 36,
-          borderRadius: "20px",
+          borderRadius: 20,
           padding: 4,
           overflow: "hidden",
           height: 68,
